@@ -38,6 +38,7 @@ a{color:inherit}
 .book{height:auto;aspect-ratio:3/4;justify-self:center;width:100%;max-width:380px;transform:rotate(-2.5deg);border-radius:4px 10px 10px 4px;box-shadow:-10px 0 0 -4px rgba(52,32,15,.35) inset, 14px 18px 40px rgba(30,19,13,.38), 4px 4px 0 #d9c8a4, 8px 8px 0 #cbb88f;overflow:hidden;background:var(--paper)}
 .eyebrow{font-size:14px;letter-spacing:.2em;text-transform:uppercase;font-weight:900;color:var(--rust);margin:0 0 14px}
 h1{font-family:var(--display);font-weight:700;font-size:clamp(44px,7vw,76px);line-height:1.02;margin:0 0 10px;text-wrap:balance}
+.h1b{display:block;font-style:italic;font-weight:500;color:var(--rust);font-size:.72em;margin-top:.08em}
 .sub{font-family:var(--display);font-style:italic;font-weight:500;font-size:clamp(21px,2.6vw,27px);color:var(--ink-soft);margin:0 0 22px}
 .lede{max-width:34em;margin:0 0 28px}
 .buy{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
@@ -93,14 +94,14 @@ const BUY_URL = "";      // paste the payment link here, e.g. a Stripe Payment L
 const PRICE   = "$19.99";      // e.g. "$9"
 </script>
 
-<div class="bar"><div class="wrap"><span>Miss Loretta Cooks</span><a href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ">Watch on YouTube</a></div></div>
+<div class="bar"><div class="wrap"><span>Miss Loretta Cooks · Cookbook</span><a href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ">Watch on YouTube</a></div></div>
 
 <header class="hero">
   <div class="wrap">
     <img class="book" src="img/cover.jpg" width="660" height="880" alt="Cookbook cover: Pull Up a Chair, Miss Loretta's Southern Kitchen">
     <div>
-      <p class="eyebrow">The cookbook</p>
-      <h1>Pull Up a Chair</h1>
+      <p class="eyebrow">Miss Loretta’s cookbook</p>
+      <h1>Pull Up a Chair <span class="h1b">Cookbook</span></h1>
       <p class="sub">Miss Loretta’s Southern Kitchen</p>
       <p class="lede">The food we cook on the channel, written down plain so you can make it at home. Every recipe has the amounts, the times, and the tips from the videos, all in one place.</p>
       <div class="buy">
