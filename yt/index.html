@@ -92,7 +92,7 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--ink-soft);text-align:cente
 <body>
 <!-- ============ EDIT THESE TWO LINES WHEN CHECKOUT IS READY ============ -->
 <script>
-const BUY_URL = "";      // paste the payment link here, e.g. a Stripe Payment Link
+const BUY_URL = "https://buy.stripe.com/cNicMXfR8cHggNyexK0Jq00";      // paste the payment link here, e.g. a Stripe Payment Link
 const PRICE   = "$19.99";      // e.g. "$9"
 </script>
 
@@ -159,7 +159,7 @@ const PRICE   = "$19.99";      // e.g. "$9"
   var btns=document.querySelectorAll("[data-buy]"), note=document.querySelector("[data-note]");
   if(BUY_URL){
     btns.forEach(function(b){ b.href=BUY_URL; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
-    if(note) note.textContent="Secure checkout. Your download arrives by email.";
+    if(note) note.textContent="Secure checkout through Stripe. Your PDF cookbook is sent to the email you use at checkout.";
   }else{
     btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
     if(note) note.textContent="Tap to subscribe on YouTube for every new recipe.";
