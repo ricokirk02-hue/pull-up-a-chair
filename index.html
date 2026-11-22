@@ -105,7 +105,7 @@ const PRICE   = "$19.99";      // e.g. "$9"
       <p class="lede">The food we cook on the channel, written down plain so you can make it at home. Every recipe has the amounts, the times, and the tips from the videos, all in one place.</p>
       <div class="buy">
         <a class="btn" data-buy href="#">Get the cookbook · $19.99</a>
-        <p class="note" data-note>Checkout opens soon. Subscribe on YouTube so you don’t miss it.</p>
+        <p class="note" data-note>Tap to subscribe on YouTube for every new recipe.</p>
       </div>
       <ul class="facts">
         <li>Digital download</li>
@@ -158,8 +158,8 @@ const PRICE   = "$19.99";      // e.g. "$9"
     btns.forEach(function(b){ b.href=BUY_URL; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
     if(note) note.textContent="Secure checkout. Your download arrives by email.";
   }else{
-    btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent=(PRICE? PRICE+" · " : "")+"Coming soon"; });
-    if(note) note.textContent="Checkout opens soon. Tap to subscribe on YouTube so you don’t miss it.";
+    btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
+    if(note) note.textContent="Tap to subscribe on YouTube for every new recipe.";
   }
 })();
 </script>
