@@ -90,7 +90,7 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--ink-soft);text-align:cente
 <!-- ============ EDIT THESE TWO LINES WHEN CHECKOUT IS READY ============ -->
 <script>
 const BUY_URL = "";      // paste the payment link here, e.g. a Stripe Payment Link
-const PRICE   = "";      // e.g. "$9"
+const PRICE   = "$19.99";      // e.g. "$9"
 </script>
 
 <div class="bar"><div class="wrap"><span>Miss Loretta Cooks</span><a href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ">Watch on YouTube</a></div></div>
@@ -104,7 +104,7 @@ const PRICE   = "";      // e.g. "$9"
       <p class="sub">Miss Loretta’s Southern Kitchen</p>
       <p class="lede">The food we cook on the channel, written down plain so you can make it at home. Every recipe has the amounts, the times, and the tips from the videos, all in one place.</p>
       <div class="buy">
-        <a class="btn" data-buy href="#">Get the cookbook</a>
+        <a class="btn" data-buy href="#">Get the cookbook · $19.99</a>
         <p class="note" data-note>Checkout opens soon. Subscribe on YouTube so you don’t miss it.</p>
       </div>
       <ul class="facts">
@@ -158,7 +158,8 @@ const PRICE   = "";      // e.g. "$9"
     btns.forEach(function(b){ b.href=BUY_URL; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
     if(note) note.textContent="Secure checkout. Your download arrives by email.";
   }else{
-    btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent="Coming soon · Subscribe for the link"; });
+    btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent=(PRICE? PRICE+" · " : "")+"Coming soon"; });
+    if(note) note.textContent="Checkout opens soon. Tap to subscribe on YouTube so you don’t miss it.";
   }
 })();
 </script>
