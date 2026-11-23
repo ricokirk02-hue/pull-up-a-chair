@@ -84,6 +84,37 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--ink-soft);text-align:cente
   .dish.wide img{aspect-ratio:4/3}
   .btn{width:100%;text-align:center}
 }
+
+/* Black Friday banner + popup */
+.bf{background:#b04e24;color:#fff7e8;text-align:center;font-weight:900;font-size:15px;letter-spacing:.04em;padding:10px 14px;position:sticky;top:0;z-index:50}
+.bf a{color:#fff7e8}
+.bf .cd{display:inline-block;background:rgba(0,0,0,.22);border-radius:6px;padding:2px 8px;margin-left:6px;font-variant-numeric:tabular-nums}
+.price{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px;margin:0 0 18px}
+.price .now{font-family:var(--display);font-weight:700;font-size:44px;line-height:1;color:var(--ink)}
+.price .tag{background:var(--skillet);color:var(--gold);font-weight:900;font-size:13px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border-radius:5px}
+.price .later{font-size:15px;color:var(--ink-soft);font-weight:700;width:100%}
+.ml-modal{position:fixed;inset:0;background:rgba(30,19,13,.62);display:flex;align-items:center;justify-content:center;padding:18px;z-index:100}
+.ml-modal[hidden]{display:none}
+.ml-box{background:var(--paper);border-radius:14px;max-width:420px;width:100%;padding:28px 24px 22px;position:relative;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.ml-box .x{position:absolute;top:8px;right:12px;background:none;border:0;font-size:28px;line-height:1;color:var(--ink-soft);cursor:pointer}
+.ml-box h3{font-family:var(--display);font-size:30px;line-height:1.1;margin:6px 0 8px}
+.ml-box p{margin:0 0 16px;color:var(--ink-soft);font-size:16px}
+.ml-box .btn{width:100%;text-align:center}
+.ml-box .alt{display:block;margin-top:12px;font-size:15px;font-weight:700;color:var(--rust)}
+/* Sample pages */
+.samples{padding:64px 0}
+.samples p.intro{color:var(--ink-soft);max-width:36em;margin:0 0 28px}
+.pages{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+.pages a{display:block;text-decoration:none}
+.pages img{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:6px;box-shadow:0 10px 24px rgba(30,19,13,.25);background:#fff}
+.pages span{display:block;font-size:14px;font-weight:700;color:var(--ink-soft);margin-top:10px;text-align:center}
+/* Free recipe card */
+.free{background:var(--skillet);color:var(--paper);padding:56px 0}
+.free .wrap{display:grid;grid-template-columns:minmax(0,4fr) minmax(0,6fr);gap:40px;align-items:center}
+.free img{border-radius:8px;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.free p{color:#d8c6a6}
+.free iframe{width:100%;min-height:330px;border:0;border-radius:8px;background:#fff}
+@media (max-width:820px){.pages{grid-template-columns:repeat(2,minmax(0,1fr))}.free .wrap{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){.btn{transition:none}}
 </style>
 </head>
@@ -92,8 +123,12 @@ footer{padding:26px 0 40px;font-size:14px;color:var(--ink-soft);text-align:cente
 <script>
 const BUY_URL = "/buy/";      // paste the payment link here, e.g. a Stripe Payment Link
 const PRICE   = "$19.99";      // e.g. "$9"
+const REGULAR_PRICE = "$39.99";                          // price after the sale ends
+const SALE_ENDS = "2026-12-01T00:00:00-07:00";           // Black Friday sale ends (Denver time). After this, sale banner/popup hide.
+const EMAIL_FORM_EMBED = "";  // paste the email form embed URL (e.g. GoHighLevel form link). Section stays hidden until set.
 </script>
 
+<div class="bf" data-sale hidden>BLACK FRIDAY: the cookbook is $19.99 through Cyber Monday. Then it goes to $39.99. <span class="cd" data-countdown></span></div>
 <div class="bar"><div class="wrap"><span>Miss Loretta Cooks · Cookbook</span><a href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ">Watch on YouTube</a></div></div>
 
 <header class="hero">
@@ -104,14 +139,15 @@ const PRICE   = "$19.99";      // e.g. "$9"
       <h1>Pull Up a Chair <span class="h1b">Cookbook</span></h1>
       <p class="sub">Miss Loretta’s Southern Kitchen</p>
       <p class="lede">The food we cook on the channel, written down plain so you can make it at home. Every recipe has the amounts, the times, and the tips from the videos, all in one place.</p>
+      <div class="price"><span class="now">$19.99</span><span class="tag" data-sale hidden>Black Friday price</span><span class="later" data-sale hidden>Regular price $39.99 starting December 1</span></div>
       <div class="buy">
         <a class="btn" data-buy href="#">Get the cookbook · $19.99</a>
         <p class="note" data-note>Tap to subscribe on YouTube for every new recipe.</p>
       </div>
       <ul class="facts">
-        <li>Digital download</li>
-        <li>Read it on your phone or print it</li>
-        <li>Recipes from the videos</li>
+        <li>150 recipes · 427 pages</li>
+        <li>Four books in one</li>
+        <li>PDF for your phone, tablet or printer</li>
       </ul>
     </div>
   </div>
@@ -127,6 +163,30 @@ const PRICE   = "$19.99";      // e.g. "$9"
       <figure class="dish"><img src="img/cornbread.jpg" alt="Cornbread in a cast iron skillet" loading="lazy"><figcaption><b>Skillet Cornbread</b><span>Baked in cast iron</span></figcaption></figure>
       <figure class="dish"><img src="img/rack.jpg" alt="Salmon croquettes draining on a rack" loading="lazy"><figcaption><b>Salmon Croquettes</b><span>Dinner from one can, with the quick sauce</span></figcaption></figure>
       <figure class="dish"><img src="img/plate.jpg" alt="Salmon croquettes with buttered rice and smothered cabbage" loading="lazy"><figcaption><b>The Sides</b><span>Buttered rice and smothered cabbage</span></figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section class="samples" id="look-inside">
+  <div class="wrap">
+    <h2>Look inside</h2>
+    <p class="intro">Real pages from the book. Tap a page to see it bigger.</p>
+    <div class="pages">
+      <a href="img/samples/chapter-opener.jpg" target="_blank" rel="noopener"><img src="img/samples/chapter-opener.jpg" width="660" height="990" alt="Sample page: Chapter 1, Fried Right" loading="lazy"><span>Chapter opener</span></a>
+      <a href="img/samples/recipe-croquettes-1.jpg" target="_blank" rel="noopener"><img src="img/samples/recipe-croquettes-1.jpg" width="660" height="990" alt="Sample page: Salmon Croquettes ingredients" loading="lazy"><span>Salmon Croquettes</span></a>
+      <a href="img/samples/recipe-croquettes-2.jpg" target="_blank" rel="noopener"><img src="img/samples/recipe-croquettes-2.jpg" width="660" height="990" alt="Sample page: Salmon Croquettes method" loading="lazy"><span>Step by step</span></a>
+      <a href="img/samples/recipe-jollof.jpg" target="_blank" rel="noopener"><img src="img/samples/recipe-jollof.jpg" width="660" height="990" alt="Sample page: Jollof Rice" loading="lazy"><span>Jollof Rice</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="free" id="free-recipe" data-email hidden>
+  <div class="wrap">
+    <img src="img/samples/free-card.jpg" width="680" height="880" alt="Free Skillet Cornbread recipe card" loading="lazy">
+    <div>
+      <h2>Free recipe card</h2>
+      <p>Get Miss Loretta’s Skillet Cornbread card free. Enter your email and it comes right over, along with new recipes when they’re out.</p>
+      <iframe data-email-frame title="Free recipe card signup" loading="lazy"></iframe>
     </div>
   </div>
 </section>
@@ -150,6 +210,17 @@ const PRICE   = "$19.99";      // e.g. "$9"
   </div>
 </section>
 
+<div class="ml-modal" data-popup hidden role="dialog" aria-modal="true" aria-labelledby="bf-title">
+  <div class="ml-box">
+    <button class="x" type="button" data-popup-close aria-label="Close">×</button>
+    <p class="eyebrow">Black Friday</p>
+    <h3 id="bf-title">Pull Up a Chair for $19.99</h3>
+    <p>150 recipes, four books in one. This price runs through Cyber Monday, then it goes to $39.99. <span data-countdown></span></p>
+    <a class="btn" data-buy href="#">Get the cookbook · $19.99</a>
+    <a class="alt" href="#free-recipe" data-email hidden data-popup-close>Not ready? Get a free recipe card</a>
+  </div>
+</div>
+
 <footer><div class="wrap">Pull Up a Chair: Miss Loretta’s Southern Kitchen · Miss Loretta Cooks</div></footer>
 
 <script>
@@ -161,6 +232,36 @@ const PRICE   = "$19.99";      // e.g. "$9"
   }else{
     btns.forEach(function(b){ b.href="https://www.youtube.com/channel/UCId5w9gUQY6c0jXgUI9zoiQ?sub_confirmation=1"; b.textContent = PRICE ? "Get the cookbook · "+PRICE : "Get the cookbook"; });
     if(note) note.textContent="Tap to subscribe on YouTube for every new recipe.";
+  }
+})();
+</script>
+<script>
+(function(){
+  var end=new Date(SALE_ENDS).getTime(), onSale=Date.now()<end;
+  var q=function(a){return document.querySelectorAll(a)};
+  if(onSale){ q("[data-sale]").forEach(function(e){e.hidden=false}); }
+  function tick(){
+    var ms=end-Date.now(); if(ms<=0){ q("[data-sale]").forEach(function(e){e.hidden=true}); return; }
+    var d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5),m=Math.floor(ms%36e5/6e4);
+    var t="Ends in "+d+"d "+h+"h "+m+"m";
+    q("[data-countdown]").forEach(function(e){e.textContent=t});
+  }
+  if(onSale){ tick(); setInterval(tick,30000); }
+  if(EMAIL_FORM_EMBED){
+    q("[data-email]").forEach(function(e){e.hidden=false});
+    q("[data-email-frame]").forEach(function(f){f.src=EMAIL_FORM_EMBED});
+  }
+  var pop=document.querySelector("[data-popup]");
+  if(pop && onSale){
+    var seen=false; try{seen=sessionStorage.getItem("ml_bf_seen")==="1"}catch(e){}
+    function show(){ if(seen) return; seen=true; try{sessionStorage.setItem("ml_bf_seen","1")}catch(e){} pop.hidden=false; }
+    if(!seen){
+      setTimeout(show,8000);
+      document.addEventListener("mouseout",function(e){ if(!e.relatedTarget && e.clientY<10) show(); });
+    }
+    q("[data-popup-close]").forEach(function(b){b.addEventListener("click",function(){pop.hidden=true})});
+    pop.addEventListener("click",function(e){ if(e.target===pop) pop.hidden=true; });
+    document.addEventListener("keydown",function(e){ if(e.key==="Escape") pop.hidden=true; });
   }
 })();
 </script>
